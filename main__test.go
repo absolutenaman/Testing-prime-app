@@ -10,20 +10,18 @@ import (
 	"testing"
 )
 
-type testForPrime struct {
-	name     string
-	msg      string
-	expected bool
-	testNum  int
-}
-
 func Test__isPrime(t *testing.T) {
-	var tests [4]testForPrime
-	tests[0] = testForPrime{name: "IsPrime", msg: "The number entered 7 is indeed a prime number", testNum: 7, expected: true}
-	tests[1] = testForPrime{name: "isNotPrime", msg: "0 and 1 are not prime numbers", testNum: 1, expected: false}
-	tests[2] = testForPrime{name: "isNotPrime", msg: "Negative numbers are not prime numbers", testNum: -1, expected: false}
-	tests[3] = testForPrime{name: "isNotPrime", msg: "The number entered 20 is not a prime number as it got divided by 2", testNum: 20, expected: false}
-
+	tests := []struct {
+		name     string
+		msg      string
+		expected bool
+		testNum  int
+	}{
+		{name: "IsPrime", msg: "The number entered 7 is indeed a prime number", testNum: 7, expected: true},
+		{name: "isNotPrime", msg: "0 and 1 are not prime numbers", testNum: 1, expected: false},
+		{name: "isNotPrime", msg: "Negative numbers are not prime numbers", testNum: -1, expected: false},
+		{name: "isNotPrime", msg: "The number entered 20 is not a prime number as it got divided by 2", testNum: 20, expected: false},
+	}
 	for i := 0; i < len(tests); i++ {
 		res, msg := isPrime(tests[i].testNum)
 		if !res && tests[i].expected {
